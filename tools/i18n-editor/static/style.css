@@ -1,0 +1,251 @@
+:root {
+  --bg: #f6f7f9;
+  --panel: #ffffff;
+  --line: #e2e5ea;
+  --ink: #16191d;
+  --mute: #6b7280;
+  --accent: #0057da;          /* Nintendo blue, as in the project README */
+  --accent-ink: #ffffff;
+  --warn: #b45309;
+  --warn-bg: #fef3c7;
+  --miss: #b91c1c;
+  --miss-bg: #fee2e2;
+  --untr: #7c5800;
+  --untr-bg: #fef9c3;
+  --done: #15803d;
+  --dirty: #0057da;
+  --dirty-bg: #eaf1ff;
+  --radius: 8px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #14171c;
+    --panel: #1b1f26;
+    --line: #2b313b;
+    --ink: #e6e9ee;
+    --mute: #9aa3b2;
+    --accent: #4d90ff;
+    --accent-ink: #0b1220;
+    --warn: #fbbf24;
+    --warn-bg: #3a2f10;
+    --miss: #fca5a5;
+    --miss-bg: #3d1b1b;
+    --untr: #fde68a;
+    --untr-bg: #3a3413;
+    --done: #6ee7a0;
+    --dirty: #4d90ff;
+    --dirty-bg: #14243f;
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 14px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+/* ---------- bars ---------- */
+
+.bar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 16px;
+  background: var(--panel);
+  border-bottom: 1px solid var(--line);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  flex-wrap: wrap;
+}
+.sub-bar { top: 53px; z-index: 19; }
+
+.brand { display: flex; align-items: baseline; gap: 8px; }
+.logo { font-weight: 700; letter-spacing: .2px; }
+.sub { color: var(--mute); font-size: 12px; }
+.spacer { flex: 1 1 auto; }
+
+.field { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--mute); }
+.field select {
+  font: inherit;
+  font-size: 13px;
+  color: var(--ink);
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 5px 8px;
+}
+
+.chk { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--mute); }
+
+button {
+  font: inherit;
+  cursor: pointer;
+  border-radius: 6px;
+  border: 1px solid var(--line);
+  background: var(--bg);
+  color: var(--ink);
+  padding: 6px 12px;
+}
+button:hover:not(:disabled) { border-color: var(--accent); }
+button:disabled { opacity: .45; cursor: default; }
+
+button.primary {
+  background: var(--accent);
+  color: var(--accent-ink);
+  border-color: transparent;
+  font-weight: 600;
+  min-width: 108px;
+}
+
+#search {
+  font: inherit;
+  padding: 6px 10px;
+  min-width: 260px;
+  flex: 0 1 380px;
+  color: var(--ink);
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+}
+
+.chips { display: flex; gap: 6px; flex-wrap: wrap; }
+.chips button { padding: 4px 10px; font-size: 12.5px; border-radius: 999px; }
+.chips button.on { background: var(--accent); color: var(--accent-ink); border-color: transparent; }
+
+.meta { color: var(--mute); font-size: 12px; font-variant-numeric: tabular-nums; }
+
+/* coverage */
+.cov { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--mute); }
+.covbar { width: 110px; height: 6px; background: var(--line); border-radius: 999px; overflow: hidden; }
+.covbar i { display: block; height: 100%; background: var(--accent); width: 0; transition: width .25s; }
+
+/* ---------- rows ---------- */
+
+main { padding: 14px 16px 40vh; }
+.empty { color: var(--mute); padding: 40px 4px; }
+
+.group {
+  margin: 18px 0 8px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--mute);
+}
+
+.row {
+  display: grid;
+  grid-template-columns: minmax(180px, 22ch) minmax(220px, 1fr) minmax(260px, 1.15fr);
+  gap: 14px;
+  padding: 10px 12px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  margin-bottom: 6px;
+  align-items: start;
+}
+.row.is-dirty { border-color: var(--dirty); background: var(--dirty-bg); }
+
+.cell { min-width: 0; }
+
+code.k {
+  font: 12px/1.4 ui-monospace, SFMono-Regular, Consolas, monospace;
+  color: var(--mute);
+  word-break: break-all;
+  display: block;
+}
+
+.badges { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 5px; }
+.badge {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: .03em;
+  text-transform: uppercase;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+.b-missing      { background: var(--miss-bg); color: var(--miss); }
+.b-untranslated { background: var(--untr-bg); color: var(--untr); }
+.b-placeholder,
+.b-trailing-space,
+.b-long,
+.b-extra        { background: var(--warn-bg); color: var(--warn); }
+
+.reftext { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; }
+
+.ph { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 6px; }
+.ph code {
+  font: 11px ui-monospace, Consolas, monospace;
+  background: var(--warn-bg);
+  color: var(--warn);
+  padding: 1px 5px;
+  border-radius: 4px;
+}
+
+.val textarea {
+  width: 100%;
+  font: inherit;
+  color: var(--ink);
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 7px 9px;
+  resize: vertical;
+  overflow: hidden;
+  min-height: 36px;
+}
+.val textarea:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: -1px;
+  border-color: transparent;
+}
+.row.bad textarea { border-color: var(--warn); }
+
+.rowfoot {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 5px;
+  font-size: 11.5px;
+  color: var(--mute);
+}
+.len { font-variant-numeric: tabular-nums; }
+.len.over { color: var(--warn); font-weight: 600; }
+
+button.link {
+  border: 0;
+  background: none;
+  padding: 0;
+  font-size: 11.5px;
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+/* ---------- toast ---------- */
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  transform: translateX(-50%);
+  background: var(--ink);
+  color: var(--bg);
+  padding: 10px 18px;
+  border-radius: 999px;
+  font-size: 13px;
+  z-index: 50;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, .25);
+}
+.toast.err { background: var(--miss); color: #fff; }
+
+[hidden] { display: none !important; }
+
+@media (max-width: 860px) {
+  .row { grid-template-columns: 1fr; gap: 8px; }
+  code.k { word-break: break-word; }
+}

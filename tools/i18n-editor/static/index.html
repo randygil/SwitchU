@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SwitchU · Editor de traducciones</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="bar">
+  <div class="brand">
+    <span class="logo">SwitchU</span>
+    <span class="sub">editor de traducciones</span>
+  </div>
+
+  <label class="field">
+    <span>Proyecto</span>
+    <select id="project"></select>
+  </label>
+
+  <label class="field">
+    <span>Idioma</span>
+    <select id="locale"></select>
+  </label>
+
+  <div class="cov" id="cov" hidden>
+    <div class="covbar"><i id="covfill"></i></div>
+    <span id="covtext"></span>
+  </div>
+
+  <div class="spacer"></div>
+
+  <label class="chk" title="Escribe las claves en el mismo orden que en-US.json (la convención del repo).">
+    <input type="checkbox" id="reorder" checked>
+    <span>orden de en-US</span>
+  </label>
+
+  <button id="save" class="primary" disabled>Guardar</button>
+</header>
+
+<nav class="bar sub-bar">
+  <input id="search" type="search" placeholder="Buscar en clave, inglés o traducción…  (/)" autocomplete="off">
+  <div class="chips" id="filters">
+    <button data-f="all"          class="on">Todas</button>
+    <button data-f="todo">Pendientes</button>
+    <button data-f="missing">Faltantes</button>
+    <button data-f="untranslated">Sin traducir</button>
+    <button data-f="issues">Avisos</button>
+    <button data-f="done">Hechas</button>
+  </div>
+  <div class="spacer"></div>
+  <span class="meta" id="pathinfo"></span>
+</nav>
+
+<main id="main">
+  <p class="empty">Cargando…</p>
+</main>
+
+<div id="toast" class="toast" hidden></div>
+
+<template id="row-tpl">
+  <div class="row">
+    <div class="cell key">
+      <code class="k"></code>
+      <div class="badges"></div>
+    </div>
+    <div class="cell ref">
+      <p class="reftext"></p>
+      <div class="ph"></div>
+    </div>
+    <div class="cell val">
+      <textarea rows="1" spellcheck="true" lang="es"></textarea>
+      <div class="rowfoot">
+        <span class="len"></span>
+        <button class="link copy" type="button">copiar inglés</button>
+        <button class="link revert" type="button" hidden>deshacer</button>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script src="app.js"></script>
+</body>
+</html>
